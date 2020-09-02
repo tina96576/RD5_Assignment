@@ -7,17 +7,22 @@ create table member(
     name varchar(20) not null,
     account varchar(20) not null,
     pwd varchar(20) not null,
-    birth varchar(20) not null,
-    email varchar(20) not null);
+    sex varchar(20) not null,
+    email varchar(20) not null
+    );
 
-create table proccess(
+create table process(
     pid int auto_increment primary key,
     mid int not null,
-    depositWithdraw varchar(5) not null);
+    depositWithdraw varchar(5) not null,
+    pmoney int not null,
+    balance int not null,
+    cdate timestamp not null default now()
+    
+);
 
-create table detail(
-    did int auto_increment primary key,
-    mid int not null,
-    pmoney varchar(20) not null,
-    cdate timestamp not null default now());
+insert into process(mid,depositWithdraw,pmoney,balance)values(1,'存款',200,200);
 
+insert into process(mid,depositWithdraw,pmoney,balance)values(1,'存款',400,600);
+
+SELECT * FROM process where mid=1 ORDER BY cdate DESC limit 1 

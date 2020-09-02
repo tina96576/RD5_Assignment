@@ -5,6 +5,7 @@ session_start();
 
 if(!isset($_SESSION["name"])){
     header("location:index.php");
+    echo 'no-name';
 }
 
 if(isset($_GET["logout"])){
@@ -58,8 +59,8 @@ if(isset($_GET["logout"])){
 <div class="container-fluid">
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand">Navbar</a>
-  <form class="form-inline" method="post"> 
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">登出</button>
+  <form class="form-inline"> 
+    <a href="index.php?logout=1" class="btn btn-outline-success my-2 my-sm-0" role="button" name="logout">登出</a>
   </form>
 </nav>
   
@@ -69,33 +70,19 @@ if(isset($_GET["logout"])){
     <div class="row">
       <div class="col-sm-2" ></div>
       <div class="col-sm-3">
-      <a href="proccess.php?id=1" class="btn btn-warning btn-lg" role="button">存款</a>
-      </div>
-
+      <a href="process.php?id=存款" class="btn btn-warning btn-lg" role="button">存款</a></div>
       <div class="col-sm-2" ></div>
-
-      <div class="col-sm-3">
-      <a href="#" class="btn btn-warning btn-lg" role="button">提款</a>
-      </div>
-      
+      <div class="col-sm-3"><a href="process.php?id=提款" class="btn btn-warning btn-lg" role="button">提款</a></div>
       <div class="col-sm-2" ></div>
     </div>
-    <br>
-    
     <div class="row">
       <div class="col-sm-2" ></div>
-      <div class="col-sm-3" >
-      <a href="#" class="btn btn-warning btn-lg" role="button">交易明細</a>
-      </div>
+      <div class="col-sm-3" ><a href="detail.php?id=1" class="btn btn-warning btn-lg" role="button">交易明細</a></div>
       <div class="col-sm-2" ></div>
-      <div class="col-sm-3" >
-      <a href="#" class="btn btn-warning btn-lg" role="button">查詢餘額</a>  
-      </div>
+      <div class="col-sm-3" ><a href="detail.php?id=2" class="btn btn-warning btn-lg" role="button">查詢餘額</a></div>
       <div class="col-sm-2" ></div>
     </div>
     <br>
-
-    <!-- Or let Bootstrap automatically handle the layout -->
    
   </div>
 </div>

@@ -3,12 +3,14 @@
 session_start();
 require("conn.php");
 
+
+
 if(isset($_POST["btnOK"])){
 
 
     $Name=$_POST["txtUserName"];
     $Password=$_POST["txtPassword"];
-  
+    $Password=hash("sha256", $Password);
     //member
     $sql1="select * from member where name='$Name' and pwd='$Password'";
     require("conn.php");
@@ -19,7 +21,7 @@ if(isset($_POST["btnOK"])){
     if($Name=$row1['name'] and $Password=$row1['pwd']){
        
         $_SESSION["mid"]=$row1["mid"];
-        $_SESSION["name"]=$Name;
+        $_SESSION["name"]=$row1['name'];
         echo "<script> {window.alert('登入成功'); location.href='home.php'} </script>";
         exit(); 
     }

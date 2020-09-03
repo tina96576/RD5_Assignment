@@ -21,7 +21,7 @@ if(isset($_GET["logout"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -54,14 +54,26 @@ if(isset($_GET["logout"])){
         border:2px #003C9D solid;
     }
 
+    .form-inline {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    padding:20px;
+    margin-top:10px;
+    }
+
+
 
 </style>
 <div class="container-fluid">
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand">Navbar</a>
-  <form class="form-inline"> 
-    <a href="index.php?logout=1" class="btn btn-outline-success my-2 my-sm-0" role="button" name="logout">登出</a>
+  <a class="navbar-brand">Bank</a>
+  
+  <form class="form-inline">
+    <p>用戶帳號：<?= $_SESSION['name']?><p>&nbsp; 
+    <a href="index.php?logout=1" class="btn btn-outline-success my-2 my-sm-0" role="button" name="logout">登出</a> 
   </form>
+  
 </nav>
   
   

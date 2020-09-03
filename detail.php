@@ -3,25 +3,41 @@
 session_start();
 require("conn.php");
 
+$mid=$_SESSION["mid"];
+$name=$_SESSION["name"];
+
+// echo "mid".$mid."<br>";
+// echo "name".$name;
+
 if(!isset($_SESSION["name"])){
     header("location:index.php");
 }
+if(isset($_GET["logout"])){
+    unset($_SESSION["name"]);
+    unset($_SESSION["mid"]);
+    
+    header("location: index.php");
+    exit();
+}
 
-$mid=$_SESSION["mid"];
-$sql="SELECT * FROM process where mid=1 ORDER BY cdate  ASC ";
+$sql="SELECT * FROM process where mid=$mid ORDER BY cdate ";
 $result=mysqli_query($link,$sql);
 
 $id=$_GET["id"];
 
-$sql2="SELECT * FROM process where mid=1 ORDER BY `process`.`cdate` DESC";
+$sql2="SELECT * FROM process where mid=$mid ORDER BY cdate DESC";
 $result2=mysqli_query($link,$sql2);
 $row2=mysqli_fetch_assoc($result2);
+
+$balance2=$row2['balance'];
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Bank</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -43,6 +59,7 @@ h3{
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+  overflow-y: auto;
   
   
 }
@@ -63,13 +80,24 @@ h3{
   background-color: #0066CC;
   color: white;
 }
+
+.form-inline {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    padding:20px;
+    margin-top:10px;
+}
+
 </style>
 <div class="container-fluid">
     <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand">Bank</a>
-    <form class="form-inline" method="post"> 
-        <a href="home.php" class="btn btn-outline-primary my-2 my-sm-0" role="button" name="logout">回首頁</a>
-    </form>
+    <form class="form-inline">
+    <p>用戶帳號：<?= $_SESSION['name']?><p>&nbsp; 
+    <a href="home.php" class="btn btn-outline-primary my-2 my-sm-0" role="button" name="logout">回首頁</a> 
+  </form>
+
     </nav>
   
   
@@ -91,7 +119,16 @@ h3{
             <?php $i=1; while($row=mysqli_fetch_assoc($result)):?>
                 <td><?= $i;?></td>
                 <td><?=$row['depositWithdraw']?></td>
-                <td><?=$row['pmoney']?></td>
+                <td>
+                <?php 
+                    if($row['depositWithdraw']=="存款"){
+                        echo "+".$row['pmoney'];
+                    }else{
+                        echo "-".$row['pmoney'];
+                    }
+                ?>
+                </td>
+                
                 <td><?=$row['balance']?></td>
                 <td><?=$row['cdate']?></td>
             </tr>
@@ -100,10 +137,8 @@ h3{
 
         <?php }else{?>
 
-        <table id="detail">
-            <tr><th>餘額</th><th>日期</th></tr>
-            <tr><td><?=$row2['balance']?></td><td><?=$row2['cdate']?></td></tr>
-        </table>
+        <h3 id="rankid1">*****</h3>
+       
         <?php }?>
         
         
@@ -117,9 +152,25 @@ h3{
 
     var x="<?=$id;?>";
   
+    var balance2="<?=$balance2?>";
     if(x==2){
         document.getElementById("title").innerHTML="餘額";
     }
+
+    
+    document.getElementById("rankid1").onclick = function() {changeAmount1()};
+    
+    function changeAmount1() {
+        document.getElementById('rankid1').innerHTML = "$ "+balance2+" 元";
+        document.getElementById("rankid1").onclick = function() {changeAmount2()};
+    }
+    function changeAmount2() {
+        document.getElementById('rankid1').innerHTML = "****";
+        document.getElementById("rankid1").onclick = function() {changeAmount1()};
+
+    }
+    
+  
 
     </script>
 

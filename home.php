@@ -3,14 +3,14 @@
 session_start();
 
 
-if(!isset($_SESSION["name"])){
+if(!isset($_SESSION["name2"])){
     header("location:index.php");
     echo 'no-name';
 }
 
 if(isset($_GET["logout"])){
-    unset($_SESSION["name"]);
-    unset($_SESSION["mid"]);
+    unset($_SESSION["name2"]);
+    unset($_SESSION["mid2"]);
     
     header("location: index.php");
     exit();
@@ -70,7 +70,7 @@ if(isset($_GET["logout"])){
   <a class="navbar-brand">Bank</a>
   
   <form class="form-inline">
-    <p>用戶帳號：<?= $_SESSION['name']?><p>&nbsp; 
+    <p>用戶帳號：<?= $_SESSION['name2']?><p>&nbsp; 
     <a href="index.php?logout=1" class="btn btn-outline-success my-2 my-sm-0" role="button" name="logout">登出</a> 
   </form>
   

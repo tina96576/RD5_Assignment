@@ -20,8 +20,8 @@ if(isset($_POST["btnOK"])){
 
     if($Name=$row1['name'] and $Password=$row1['pwd']){
        
-        $_SESSION["mid"]=$row1["mid"];
-        $_SESSION["name"]=$row1['name'];
+        $_SESSION["mid2"]=$row1["mid"];
+        $_SESSION["name2"]=$row1['name'];
         echo "<script> {window.alert('登入成功'); location.href='home.php'} </script>";
         exit(); 
     }

@@ -3,18 +3,18 @@
 session_start();
 require("conn.php");
 
-$mid=$_SESSION["mid"];
-$name=$_SESSION["name"];
+$mid=$_SESSION["mid2"];
+$name=$_SESSION["name2"];
 
 // echo "mid".$mid."<br>";
 // echo "name".$name;
 
-if(!isset($_SESSION["name"])){
+if(!isset($_SESSION["name2"])){
     header("location:index.php");
 }
 if(isset($_GET["logout"])){
-    unset($_SESSION["name"]);
-    unset($_SESSION["mid"]);
+    unset($_SESSION["name2"]);
+    unset($_SESSION["mid2"]);
     
     header("location: index.php");
     exit();
@@ -94,7 +94,7 @@ h3{
     <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand">Bank</a>
     <form class="form-inline">
-    <p>用戶帳號：<?= $_SESSION['name']?><p>&nbsp; 
+    <p>用戶帳號：<?= $_SESSION['name2']?><p>&nbsp; 
     <a href="home.php" class="btn btn-outline-primary my-2 my-sm-0" role="button" name="logout">回首頁</a> 
   </form>
 

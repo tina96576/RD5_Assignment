@@ -21,8 +21,4 @@ create table process(
     
 );
 
-insert into process(mid,depositWithdraw,pmoney,balance)values(1,'存款',200,200);
 
-insert into process(mid,depositWithdraw,pmoney,balance)values(1,'存款',400,600);
-
-SELECT * FROM process where mid=1 ORDER BY cdate DESC limit 1 

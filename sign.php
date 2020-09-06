@@ -21,8 +21,8 @@ require("conn.php");
         $row2=mysqli_fetch_assoc($result2);
 
        
-        if($row2["email"]==$Email and $row2["name"]==$Name and $row2["pwd"]==$Password1){
-            echo "<script> {window.alert('已註冊，請重新登入'); location.href='index.php'} </script>";
+        if($row2["email"]==$Email and $row2["name"]==$Name){
+            echo "<script> {window.alert('註冊失敗，該用戶已註冊'); location.href='index.php'} </script>";
             
         }else{
               
@@ -36,7 +36,8 @@ require("conn.php");
     }
 
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -52,43 +53,129 @@ require("conn.php");
 
 
 <body>
+<style type="text/css">
+  
+  html,body{
+      height:100%;
+  }
+  body{
+      background: rgb(95,181,241);
+      background: linear-gradient(90deg, 
+      rgba(95,181,241,1) 9%,
+      rgba(177,233,237,1) 24%,
+      rgba(217,169,234,1) 74%, 
+      rgba(191,148,233,1) 86%);
+      background-attachment:fixed;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      
+  }
 
-    
-    <div class="container">
+  .login{
+      width:500px;
+      height:580px;
+      background-color:white;
+      border-radius: 10px;
+      display:flex;
+      justify-content:center;
+      border-top-style:solid;
+      border-width: 50px;
+      border-color:#4682B4;
+     
+      
+     
+  }
+  .form{
+      font-family:'Noto Sans TC',sans-serif;
+      width:400px;
+      color:black;
+     
+  }
+  .form h2{
+      margin-bottom:0px;
+      margin-top:-40px;
+      color:whitesmoke;
+      text-align:center;
+      
+  }
+  .form .group{
+      margin-bottom:15px;
 
-        <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-        <h1>註冊</h1>
-        <form method="post" action="">
-            <div class="form-group">
-                <label >姓名</label><input type="text" class="form-control" name="txtUserName"  placeholder="請輸入姓名" required="required"><br>
-                <label>帳號</label><input type="text" class="form-control" name="txtAccount"   placeholder="請輸入帳號" required="required"><br>
-                <label>密碼</label><input type="password" class="form-control" id="password" name="txtPassword" placeholder="密碼長度在6-30字元內，至少包含數字大小寫英文字母" required="required" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$">
-                <input type="checkbox" onclick="showpwd()">顯示<br><br>
-                <!-- '@'前後可以是英文, 數字, 符號.或_或- -->
-                <label>性別</label><input type="radio" name="sex" value="男">男<input type="radio" name="sex" value="女">女<br><br>
-                <label>Email</label><input type="email" class="form-control" name="txtEmail"   placeholder="請輸入信箱" required="required"  pattern="/^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/"/><br> 
-            </div>
-          
-            <div class="row-md-6" >
-                <button type="submit" class="btn btn-default btn-lg" name="btnOK" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 註冊</button>
-                <button type="reset" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 取消</button>
-                <button type="reset" class="btn btn-default btn-lg" id="sign"><a href="index.php" class="glyphicon glyphicon-share-alt" style="text-decoration:none;" aria-hidden="true">登入頁</a></button> 
-            </div>   
-        </form>
-        
-        </div>
-        <div class="col-md-3"></div>
-        </div>
-        
+  }
+  .form label{
+      line-height:2;
+  }
+  .form-control{
+      width:100%;
+      border:1px solid #aaa;
+      line-height: 2;
+      border-radius:5px;
+  }
+  .form .btn-group{
+      font-size:0;
 
-    </div>
+  }
+  .form .btn{
+      font-size:20px;
+      border-radius:5px;
+      border:none;
+      background-color:#6ab4fe;
+      width:185px;
+      padding:10px 0;
+      color:#fff;
+
+  }
+  .form .btn + .btn{
+      margin-left:20px;
+  }
+  h2{
+      margin-bottom:20px;
+  }
+  .form #sex{
+      margin:10px;
+  } 
+
+</style> 
+<div>
+  <div class="login">
+      
+      <form class="form" method="post">
+          <h2>註冊會員</h2><br>
+          <div class="group">
+              <label for="user">姓名</label>
+              <input type="text" id="user_id" class="form-control" name="txtUserName"  placeholder="請輸入姓名" required="required">
+          </div>
+          <div class="group">
+              <label for="user_id">帳號</label>
+              <input type="text" id="user_id" class="form-control" name="txtAccount"   placeholder="請輸入帳號" required="required">
+          </div>
+          <div class="group">
+              <label for="user_password">密碼</label>
+              <input type="password" class="form-control" id="password" name="txtPassword" required="required" placeholder="密碼長度在6-30字元內，至少包含數字大小寫英文字母" required="required" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$">
+              <input type="checkbox" onclick="showpwd()">顯示  
+          </div>
+          <div class="group">
+              <label for="Email">信箱</label>
+              <input type="email" class="form-control" name="txtEmail"   placeholder="請輸入信箱" required="required"  pattern="/^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/"/>
+          </div>
+          <div class="group">
+              <label for="user_sex">性別</label>
+              <input type="radio"  name="sex" id="sex" value="男">男
+              <input type="radio"  name="sex" id="sex" value="女">女
+          </div>
+          <div >
+              <button type="submit" class="btn btn-default btn-lg" id="sign" name="btnOK" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 註冊</button>
+              <button type="reset" class="btn btn-default btn-lg" ><a href="index.php" class="glyphicon glyphicon-share-alt"  style="text-decoration:none; color:white;" aria-hidden="true">回登入頁</a></button> 
+          </div>  
+
+      </form>
+  </div>
+</div>
     
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
    
-
     <script>
         function showpwd() {
             var x = document.getElementById("password");
@@ -99,9 +186,6 @@ require("conn.php");
             }
         }
     </script>
-
-        
-   
+      
 </body>
-
 </html>
